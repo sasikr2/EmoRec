@@ -71,12 +71,15 @@ for (i, rect) in enumerate(rects):
 	# convert dlib's rectangle to a OpenCV-style bounding box
 	# [i.e., (x, y, w, h)], then draw the face bounding box
 	(x, y, w, h) = rect_to_bb(rect)
-
-d = forehead_dist(shape)
-d_t_y = int(np.sum(shape[42:47,1])/6 - 0.6*d)
-d_l_x, d_l_y = shape[0]
-d_b_x,d_b_y = shape[8]
-d_r_x,d_l_y = shape[16]
-image = img[d_t_y:d_b_y,d_l_x:d_r_x]  # croppped image
-plt.imshow(image)
+	d = forehead_dist(shape)
+	d_t_y = int(np.sum(shape[42:47,1])/6 - 0.6*d)
+	d_l_x, d_l_y = shape[0]
+	d_b_x,d_b_y = shape[8]
+	d_r_x,d_l_y = shape[16]
+	image = img[d_t_y:d_b_y,d_l_x:d_r_x]  # croppped image
+if(len(rects) > 0):
+	plt.imshow(image)
+else:
+	print('Landmark is not detected')
+	plt.imshow(img)
 
